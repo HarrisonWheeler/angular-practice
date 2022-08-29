@@ -4,49 +4,94 @@
     <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
   </div>
   <div class="modal-body">
-    <form #carForm="ngForm" (ngSubmit)="onSubmit(carForm.value)">
-      <!-- TODO finish this form -->
+    <!-- Template driven form w/custom Angular validation-->
+    <form [formGroup]="carForm" (ngSubmit)="onSubmit(carForm.value)">
       <div class="form-group">
-        <input class="form-control" type="number" name="year" id="year" placeholder="Year..." required min="1920"
-          max="2022" ngModel #year="ngModel">
-        <div *ngIf="year.invalid && (year.dirty || year.touched)" class="text-danger">Year is required
+        <input class="form-control" type="number" name="year" id="year" placeholder="Year..." min="1900" required
+          formControlName="year">
+        <div *ngIf="year?.invalid && (year?.dirty || year?.touched)" class="text-danger">Year must be within 1920-2022
         </div>
       </div>
       <div class="form-group">
-        <input class="form-control" type="text" name="make" id="make" placeholder="Make..." minlength="1" maxlength="30"
-          ngModel required #make="ngModel">
-        <div *ngIf="make.invalid && (make.dirty || make.touched)" class="text-danger">Make is required</div>
+        <input class="form-control" type="text" name="make" id="make" placeholder="Make..." required
+          formControlName="make">
+        <div *ngIf="make?.invalid && (make?.dirty || make?.touched)" class="text-danger">Make is required</div>
       </div>
       <div class="form-group">
-        <input class="form-control" type="text" name="model" id="model" placeholder="Model..." minlength="2"
-          maxlength="30" ngModel required #model="ngModel">
-        <div *ngIf="model.invalid && (model.dirty || model.touched)" class="text-danger">Model is required
+        <input class="form-control" type="text" name="model ng-valid" id="model" placeholder="Model..." minlength="2"
+          maxlength="30" required formControlName="model">
+        <div *ngIf="model?.invalid && (model?.dirty || model?.touched)" class="text-danger">Model is required
         </div>
       </div>
       <div class="form-group">
         <input class="form-control" type="number" name="price" id="price" placeholder="Price..." min="1" max="100000"
-          ngModel required #price="ngModel">
-        <div *ngIf="price.invalid && (price.dirty || price.touched)" class="text-danger">Price is required
+          required formControlName="price">
+        <div *ngIf="price?.invalid && (price?.dirty || price?.touched)" class="text-danger">Price is required
         </div>
       </div>
       <div class="form-group">
-        <textarea class="form-control" name="description" id="description" minlength="1" maxlength="500" ngModel
-          required #description="ngModel">Description...</textarea>
-        <div *ngIf="description.invalid && (description.dirty || description.touched)" class="text-danger">Description
+        <textarea class="form-control" name="description" id="description" required
+          formControlName="description">Description...</textarea>
+        <div *ngIf="description?.invalid && (description?.dirty || description?.touched)" class="text-danger">
+          Description
           is
           required
         </div>
       </div>
       <div class="form-group">
-        <input class="form-control" type="text" name="imgUrl" id="imgUrl" placeholder="Image..." ngModel required
-          #imgUrl="ngModel">
-        <div *ngIf="imgUrl.invalid && (imgUrl.dirty || imgUrl.touched)" class="text-danger">Img URL is required
+        <input class="form-control" type="text" name="imgUrl" id="imgUrl" placeholder="Image..." required
+          formControlName="imgUrl">
+        <div *ngIf="imgUrl?.invalid && (imgUrl?.dirty || imgUrl?.touched)" class="text-danger">Img URL is required
         </div>
       </div>
-      <button class="btn btn-outline-success ms-auto" [disabled]="!carForm.valid">Create</button>
+      <button class="btn btn-success ms-auto" [disabled]="!carForm.valid">Create</button>
     </form>
   </div>
 </ng-template>
 
 
 <button class="btn btn-warning" (click)="open(createModal)">Create</button>
+
+
+
+<!-- Template driven form w/built in Angular/HTML validation and error messages-->
+<!-- <form #carForm="ngForm" (ngSubmit)="onSubmit(carForm.value)">
+  <div class="form-group">
+    <input class="form-control" type="number" name="year" id="year" placeholder="Year..." required min="1920"
+      max="2022" ngModel #year="ngModel">
+    <div *ngIf="year.invalid && (year.dirty || year.touched)" class="text-danger">Year must be within 1920-2022
+    </div>
+  </div>
+  <div class="form-group">
+    <input class="form-control" type="text" name="make" id="make" placeholder="Make..." minlength="1" maxlength="30"
+      ngModel required #make="ngModel">
+    <div *ngIf="make.invalid && (make.dirty || make.touched)" class="text-danger">Make is required</div>
+  </div>
+  <div class="form-group">
+    <input class="form-control" type="text" name="model" id="model" placeholder="Model..." minlength="2"
+      maxlength="30" ngModel required #model="ngModel">
+    <div *ngIf="model.invalid && (model.dirty || model.touched)" class="text-danger">Model is required
+    </div>
+  </div>
+  <div class="form-group">
+    <input class="form-control" type="number" name="price" id="price" placeholder="Price..." min="1" max="100000"
+      ngModel required #price="ngModel">
+    <div *ngIf="price.invalid && (price.dirty || price.touched)" class="text-danger">Price is required
+    </div>
+  </div>
+  <div class="form-group">
+    <textarea class="form-control" name="description" id="description" minlength="1" maxlength="500" ngModel
+      required #description="ngModel">Description...</textarea>
+    <div *ngIf="description.invalid && (description.dirty || description.touched)" class="text-danger">Description
+      is
+      required
+    </div>
+  </div>
+  <div class="form-group">
+    <input class="form-control" type="text" name="imgUrl" id="imgUrl" placeholder="Image..." ngModel required
+      #imgUrl="ngModel">
+    <div *ngIf="imgUrl.invalid && (imgUrl.dirty || imgUrl.touched)" class="text-danger">Img URL is required
+    </div>
+  </div>
+  <button class="btn btn-success ms-auto" [disabled]="!carForm.valid">Create</button>
+</form> -->
