@@ -1,0 +1,49 @@
+<ng-template #createModal let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Create</h4>
+    <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+  </div>
+  <div class="modal-body">
+    <form #carForm="ngForm" (ngSubmit)="onSubmit(carForm.value)">
+      <!-- TODO finish this form -->
+      <div class="form-group">
+        <input class="form-control" type="number" name="year" id="year" placeholder="Year..." required min="1920"
+          max="2022" ngModel #year="ngModel">
+        <div *ngIf="make.invalid && (make.dirty || make.touched)">Must input valid year</div>
+        <div *ngIf="model.errors?.['required']" class="text-danger">Model is required</div>
+
+      </div>
+      <div class="form-group">
+        <input class="form-control" type="text" name="make" id="make" placeholder="Make..." minlength="1" maxlength="30"
+          ngModel required #make="ngModel">
+        <div *ngIf="make.invalid && (make.dirty || make.touched)" class="text-danger">Must input valid make</div>
+        <div *ngIf="model.errors?.['required']" class="text-danger">Model is required</div>
+      </div>
+      <div class="form-group">
+        <input class="form-control" type="text" name="model" id="model" placeholder="Model..." minlength="2"
+          maxlength="30" ngModel required #model="ngModel">
+        <div *ngIf="model.errors?.['minlength']" class="text-danger">Must be more than 1 character</div>
+        <div *ngIf="model.errors?.['required']" class="text-danger">Model is required</div>
+      </div>
+      <div class="form-group">
+        <input class="form-control" type="number" name="price" id="price" placeholder="Price..." min="1" max="100000"
+          ngModel required #price="ngModel">
+        <div *ngIf="price.errors?.['required']" class="text-danger">Price is required</div>
+      </div>
+      <div class="form-group">
+        <textarea class="form-control" name="description" id="description" minlength="1" maxlength="500" ngModel
+          required #description="ngModel">Description...</textarea>
+        <div *ngIf="description.errors?.['required']" class="text-danger">Description is required</div>
+      </div>
+      <div class="form-group">
+        <input class="form-control" type="text" name="imgUrl" id="imgUrl" placeholder="Image..." ngModel required
+          #imgUrl="ngModel">
+        <div *ngIf="imgUrl.errors?.['required']" class="text-danger">Img Url is required</div>
+      </div>
+      <button class="btn btn-outline-success ms-auto" [disabled]="!carForm.valid">Create</button>
+    </form>
+  </div>
+</ng-template>
+
+
+<button class="btn btn-warning" (click)="open(createModal)">Create</button>

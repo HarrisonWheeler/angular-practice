@@ -1,0 +1,23 @@
+<div class="row bg-primary align-items-center">
+  <div class="col-md-10 text-center text-light">
+    <h1>Welcome To GregsList Angular - v2</h1>
+  </div>
+  <div class="col-md-2">
+    <app-create-modal></app-create-modal>
+  </div>
+</div>
+<div class="row justify-content-between text-center my-3">
+  <div class="col-md-3">
+    <button class="btn btn-success">Cars</button>
+  </div>
+  <div class="col-md-3">
+    <button class="btn btn-success">Jobs</button>
+  </div>
+  <div class="col-md-3">
+    <button class="btn btn-success">Houses</button>
+  </div>
+</div>
+<div class="row my-2">
+  <app-car class="col-md-4 mb-2" *ngFor="let car of cars" [car]="car" (delete)="onCarDelete($event)"></app-car>
+</div>
+<router-outlet></router-outlet>
