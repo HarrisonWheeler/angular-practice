@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, Form } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Car } from '../models/Car';
+import { CarsServiceService } from '../services/cars-service.service';
 
 @Component({
   selector: 'app-create-modal',
@@ -13,14 +14,19 @@ import { Car } from '../models/Car';
 export class CreateModalComponent implements OnInit {
   carForm!: FormGroup;
 
-  constructor(private modalService: NgbModal) { }
+  constructor(private modalService: NgbModal, private carsServiceService: CarsServiceService) { }
 
   open(createModal: any) {
     this.modalService.open(createModal)
   }
 
   async onSubmit(carForm: Car) {
-    console.log("submit is working", carForm)
+    try {
+      console.log("submit is working", carForm);
+      this.carsServiceService.onSubmit(carForm).subscribe();
+    } catch (error) {
+      console.error(error)
+    }
   }
 
   ngOnInit(): void {
