@@ -7,7 +7,7 @@ import { handleError } from '../ErrorHandling';
 @Injectable({
   providedIn: 'root'
 })
-export class CarsServiceService {
+export class CarsService {
   apiUrl: string = "http://localhost:3000/api/"
 
   constructor(private httpClient: HttpClient) { }

@@ -5,12 +5,13 @@
   </div>
   <div class="modal-body">
     <!-- Template driven form w/custom Angular validation-->
-    <form [formGroup]="carForm" (ngSubmit)="onSubmit(carForm.value)">
+    <form [formGroup]="carForm" (ngSubmit)="onSubmit(carForm.value, createModal)">
       <div class="form-group">
         <input class="form-control" type="number" name="year" id="year" placeholder="Year..." min="1900" required
           formControlName="year">
         <div *ngIf="year?.invalid && (year?.dirty || year?.touched)" class="text-danger">Year must be within 1920-2022
         </div>
+        <div>*ngIf=""</div>
       </div>
       <div class="form-group">
         <input class="form-control" type="text" name="make" id="make" placeholder="Make..." required
@@ -50,7 +51,7 @@
 </ng-template>
 
 
-<button class="btn btn-warning" (click)="open(createModal)">Create</button>
+<button class="btn btn-warning" (click)="openModal(createModal)">Create</button>
 
 
 
