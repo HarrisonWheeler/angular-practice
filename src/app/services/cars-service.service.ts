@@ -9,12 +9,13 @@ import { handleError } from '../ErrorHandling';
 })
 export class CarsService {
   apiUrl: string = "http://localhost:3000/api/"
+  cars: Car[] = []
 
   constructor(private httpClient: HttpClient) { }
 
   getCars(): Observable<Car[]> {
     return this.httpClient.get<Car[]>(this.apiUrl + "cars").pipe(map(response => {
-      return response
+      return response;
     }),
       catchError(handleError)
     )

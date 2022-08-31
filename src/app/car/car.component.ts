@@ -1,6 +1,6 @@
-import { Component, EventEmitter, Injectable, Input, OnInit, Output } from '@angular/core';
-import axios from 'axios';
-import { Car } from '../models/Car';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { CarsService } from '../services/cars-service.service';
 
 @Component({
   selector: 'app-car',
@@ -15,8 +15,12 @@ export class CarComponent implements OnInit {
   @Input() car: any
   @Output() delete = new EventEmitter()
 
-  constructor() { }
+  constructor(private carsService: CarsService, private activatedRoute: ActivatedRoute) { }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+    // this.activatedRoute.paramMap.subscribe(paramMap => {
+    //   this.
+    // })
+  }
 
 }

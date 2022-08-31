@@ -1,6 +1,6 @@
-<ng-template [ngIf]="car.price > 1000">
+<ng-template [ngIf]="car.price > 0">
   <div class="border rounded shadow p-2">
-    <img [routerLink]="['/car-details-page', car.id]" [src]="car.imgUrl" [alt]="car.make + car.model " class="img-fluid"
+    <img [routerLink]="['/cars/', car.id]" [src]="car.imgUrl" [alt]="car.make + car.model " class="img-fluid"
       routerLinkActive="activebutton" ariaCurrentWhenActive="page">
     <div class="d-flex justify-content-between my-2">
       <h5>{{car.year}}</h5>

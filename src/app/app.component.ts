@@ -12,20 +12,9 @@ import { CarsService } from './services/cars-service.service';
 
 export class AppComponent implements OnInit {
   title = 'gregslist';
-  cars: Car[] = []
 
-  constructor(private carsService: CarsService) { }
+  constructor() { }
 
-  ngOnInit(): void {
+  ngOnInit(): void { }
 
-    this.carsService.getCars().subscribe(cars => {
-      this.cars = cars;
-    })
-    console.log('get all cars', this.cars)
-  }
-
-  onCarDelete(carId: string) {
-    // console.log('carId log in app ts', carId, 'carid');
-    // this.cars = this.cars.filter((c: Car) => c.id !== carId)
-  }
 }

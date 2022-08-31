@@ -1,6 +1,8 @@
 <div class="row bg-primary align-items-center">
   <div class="col-md-10 text-center text-light">
-    <h1>Welcome To GregsList Angular - v2</h1>
+    <a routerLink="">
+      <h1>Welcome To GregsList Angular - v2</h1>
+    </a>
   </div>
   <div class="col-md-2">
     <app-create-modal></app-create-modal>
@@ -8,16 +10,15 @@
 </div>
 <div class="row justify-content-between text-center my-3">
   <div class="col-md-3">
-    <button class="btn btn-success">Cars</button>
+    <button routerLink="/cars" class="btn btn-success">Cars</button>
   </div>
   <div class="col-md-3">
-    <button class="btn btn-success">Jobs</button>
+    <button routerLink="/jobs" class="btn btn-success">Jobs</button>
   </div>
   <div class="col-md-3">
-    <button class="btn btn-success">Houses</button>
+    <button routerLink="/houses" class="btn btn-success">Houses</button>
   </div>
 </div>
 <div class="row my-2">
-  <app-car class="col-md-4 mb-2" *ngFor="let car of cars" [car]="car" (delete)="onCarDelete($event)"></app-car>
+  <router-outlet></router-outlet>
 </div>
-<router-outlet></router-outlet>
