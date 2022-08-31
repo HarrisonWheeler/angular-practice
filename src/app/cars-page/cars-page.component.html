@@ -1,8 +1,10 @@
 <div class="col-12">
-  <div class="row">
+  <div class="row" *ngIf="cars.length > 0">
     <app-car class="col-md-4 mb-2" *ngFor="let car of cars" [car]="car"></app-car>
+  </div>
+  <div class="row" *ngElse>
     <div class="col-12 text-center">
-      <h1 *ngIf="cars.length <= 0">No Cars To Display....</h1>
+      <h1>No Cars To Display....</h1>
     </div>
   </div>
 </div>

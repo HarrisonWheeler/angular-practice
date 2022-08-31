@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Car } from '../models/Car';
 import { CarsService } from '../services/cars-service.service';
+import { NotificationsService } from '../services/notifications.service';
 
 @Component({
   selector: 'app-create-modal',
@@ -15,7 +16,7 @@ import { CarsService } from '../services/cars-service.service';
 export class CreateModalComponent implements OnInit {
   carForm!: FormGroup;
 
-  constructor(private modalService: NgbModal, private carsService: CarsService, private formBuilder: FormBuilder, private router: Router) { }
+  constructor(private modalService: NgbModal, private carsService: CarsService, private formBuilder: FormBuilder, private router: Router, private notifications: NotificationsService) { }
 
   openModal(createModal: any) {
     this.modalService.open(createModal)
@@ -26,14 +27,16 @@ export class CreateModalComponent implements OnInit {
   }
 
   onSubmit(carForm: Car, createModal: any) {
-    try {
-      this.carsService.onSubmit(carForm).subscribe((c: Car) => {
+    this.carsService.onSubmit(carForm).subscribe({
+      next: (c: Car) => {
         this.router.navigate(['/cars/' + c.id])
-      });
-      this.closeModal(createModal);
-    } catch (error) {
-      console.error(error)
-    }
+      },
+      error: (e) => {
+        console.error(e.message)
+        this.notifications.toast(e.message, 'error')
+      }
+    });
+    this.closeModal(createModal);
   }
 
   ngOnInit(): void {

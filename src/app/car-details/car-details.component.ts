@@ -15,19 +15,31 @@ export class CarDetailsComponent implements OnInit {
   constructor(private carsService: CarsService, private activatedRoute: ActivatedRoute, private router: Router, private notifications: NotificationsService) { }
 
   ngOnInit(): void {
-    this.activatedRoute.paramMap.subscribe(paramMap => {
-      let routeParam = paramMap.get('id')
-      this.carsService.getCarById(routeParam).subscribe(car => {
-        this.car = car;
-      });
+    this.activatedRoute.paramMap.subscribe({
+      next: (paramMap) => {
+        let routeParam = paramMap.get('id')
+        this.carsService.getCarById(routeParam).subscribe(car => {
+          this.car = car;
+        });
+      },
+      error: (e) => {
+        console.error(e.message)
+        this.notifications.toast(e.message, 'error')
+      }
     })
   }
 
   async deleteCar(carId: any) {
     if (await this.notifications.confirm()) {
-      this.carsService.deleteCar(carId).subscribe(() => {
-        this.router.navigate(['cars'])
-        this.notifications.toast("Car has been deleted!", "success")
+      this.carsService.deleteCar(carId).subscribe({
+        next: () => {
+          this.notifications.toast("Car has been deleted!", "success")
+          this.router.navigate(['cars'])
+        },
+        error: (e) => {
+          console.error(e.message)
+          this.notifications.toast(e.message, 'error')
+        }
       });
     }
   }
