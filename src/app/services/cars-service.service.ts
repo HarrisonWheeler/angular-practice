@@ -25,4 +25,11 @@ export class CarsService {
     return this.httpClient.post<Car>(this.apiUrl + "cars", newCar).pipe(catchError(handleError));
   }
 
+  getCarById(carId: any): Observable<Car> {
+    return this.httpClient.get<Car>(this.apiUrl + "cars/" + carId).pipe(catchError(handleError));
+  }
+
+  deleteCar(carId: any): Observable<Car> {
+    return this.httpClient.delete<Car>(this.apiUrl + "cars/" + carId).pipe(catchError(handleError));
+  }
 }

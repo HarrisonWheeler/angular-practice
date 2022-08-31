@@ -18,9 +18,4 @@ export class CarsPageComponent implements OnInit {
     })
   }
 
-  onCarDelete(carId: string) {
-    // console.log('carId log in app ts', carId, 'carid');
-    // this.cars = this.cars.filter((c: Car) => c.id !== carId)
-  }
-
 }

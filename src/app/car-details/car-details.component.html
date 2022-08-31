@@ -1,1 +1,30 @@
-<p>car-details works!</p>
+<div class="col-12" *ngIf="car">
+  <div class="row text-center">
+    <div class="col-12">
+      <img [src]="car.imgUrl" class="rounded" alt="">
+      <img *ngIf="!car.imgUrl" src="https://bitsofco.de/content/images/2018/12/Screenshot-2018-12-16-at-21.06.29.png"
+        alt="Image Not Found">
+    </div>
+  </div>
+  <div class="row justify-content-between text-center mt-3">
+    <div class="col-md-3">
+      <h3>{{car.year}}</h3>
+    </div>
+    <div class="col-md-3">
+      <h3> {{car.make}} </h3>
+    </div>
+    <div class="col-md-3">
+      <h3>{{car.model}}</h3>
+    </div>
+    <div class="col-md-3">
+      <h3>${{car.price}}</h3>
+    </div>
+  </div>
+  <div class="row justify-content-center mt-5">
+    <div class="col-md-3">
+      <div class="d-grid gap-2">
+        <button class="btn btn-danger" type="button" (click)="deleteCar(car.id)">Delete</button>
+      </div>
+    </div>
+  </div>
+</div>

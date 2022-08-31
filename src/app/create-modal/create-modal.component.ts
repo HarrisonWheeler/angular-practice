@@ -25,7 +25,6 @@ export class CreateModalComponent implements OnInit {
     this.modalService.dismissAll(createModal)
   }
 
-
   onSubmit(carForm: Car, createModal: any) {
     try {
       this.carsService.onSubmit(carForm).subscribe((c: Car) => {

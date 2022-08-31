@@ -17,10 +17,6 @@ export class CarComponent implements OnInit {
 
   constructor(private carsService: CarsService, private activatedRoute: ActivatedRoute) { }
 
-  ngOnInit(): void {
-    // this.activatedRoute.paramMap.subscribe(paramMap => {
-    //   this.
-    // })
-  }
+  ngOnInit(): void { }
 
 }
