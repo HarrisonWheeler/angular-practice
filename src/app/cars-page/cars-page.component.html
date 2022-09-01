@@ -1,7 +1,9 @@
 <div class="col-12">
   <div class="row" *ngIf="cars.length > 0">
+    <!-- Iterating over collection of cars that was returned from Api - and sending down each obj as a PROP to the child component -->
     <app-car class="col-md-4 mb-2" *ngFor="let car of cars" [car]="car"></app-car>
   </div>
+  <!-- Conditionally rendering this message if there are no cars to display -->
   <div class="row" *ngElse>
     <div class="col-12 text-center">
       <h1>No Cars To Display....</h1>

@@ -5,6 +5,8 @@ import { CarsPageComponent } from './cars-page/cars-page.component';
 import { HousesPageComponent } from './houses-page/houses-page.component';
 import { JobsPageComponent } from './jobs-page/jobs-page.component';
 
+// This is where we register routes for the router - first match wins, so order matters here
+// This page was constructed by the Angular CLI when this project was built
 const routes: Routes = [
   { path: 'cars', component: CarsPageComponent },
   { path: 'cars/:id', component: CarDetailsComponent },

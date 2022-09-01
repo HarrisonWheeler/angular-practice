@@ -12,6 +12,7 @@ import { CarsService } from '../services/cars-service.service';
 
 
 export class CarComponent implements OnInit {
+  // This Input is telling the component that there will be an incoming PROP from the parent component
   @Input() car: any
   @Output() delete = new EventEmitter()
 

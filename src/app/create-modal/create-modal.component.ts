@@ -14,10 +14,12 @@ import { NotificationsService } from '../services/notifications.service';
 
 
 export class CreateModalComponent implements OnInit {
+  // Initializes the property carForm to type FormGroup which comes from Angular
   carForm!: FormGroup;
 
   constructor(private modalService: NgbModal, private carsService: CarsService, private formBuilder: FormBuilder, private router: Router, private notifications: NotificationsService) { }
 
+  // Probably should refactor this into utilities to make is global for any modal to close/open - that's a later me problem
   openModal(createModal: any) {
     this.modalService.open(createModal)
   }
@@ -26,6 +28,9 @@ export class CreateModalComponent implements OnInit {
     this.modalService.dismissAll(createModal)
   }
 
+  // If not handling errors, subscribe and look like this:
+  // this.carsService.onSubmit(carForm).subscribe((c: Car) => {this.router.navigate(['/cars/' + c.id])})
+  //We dont ALWAYS have to add multiple arguments to a subscribe
   onSubmit(carForm: Car, createModal: any) {
     this.carsService.onSubmit(carForm).subscribe({
       next: (c: Car) => {
@@ -36,6 +41,7 @@ export class CreateModalComponent implements OnInit {
         this.notifications.toast(e.message, 'error')
       }
     });
+    // close modal after submit is successful
     this.closeModal(createModal);
   }
 
@@ -55,11 +61,15 @@ export class CreateModalComponent implements OnInit {
         Validators.minLength(1),
         Validators.maxLength(50)
       ]),
-      price: this.formBuilder.control(''),
-      description: this.formBuilder.control('', [
+      price: this.formBuilder.control('', [
         Validators.required,
         Validators.min(1),
-        Validators.max(1000)
+        Validators.max(10000)
+      ]),
+      description: this.formBuilder.control('', [
+        Validators.required,
+        Validators.minLength(1),
+        Validators.maxLength(1000)
       ]),
       imgUrl: this.formBuilder.control('', [
         Validators.required,
